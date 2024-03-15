@@ -1,0 +1,44 @@
+:root {
+  --input-bg-light: #d5e1e3;
+  --input-bg-dark: #181818;
+
+  --input-color-light: #000000;
+  --input-color-dark: #ffffff;
+}
+
+@font-face {
+  font-family: 'Digital';
+  src: url('../../assets/fonts/DS-DIGI.TTF') format('truetype');
+}
+
+.operation {
+  position: absolute;
+  color: var(--input-color-light);
+  font-size: 15px;
+
+  top: 15px;
+  left: 15px;
+}
+
+.operation-dark {
+  color: var(--input-color-dark);
+}
+
+.input {
+  width: 100%;
+  height: 190px;
+
+  border: 10px solid #62656e;
+  border-radius: 8px;
+  text-align: end;
+
+  font-family: 'Digital';
+  font-size: 80px;
+  color: var(--input-color-light);
+  background-color: var(--input-bg-light);
+}
+
+.input-dark {
+  color: var(--input-color-dark);
+  background-color: var(--input-bg-dark);
+}
