@@ -5,9 +5,10 @@ type ThemeProviderProps = PropsWithChildren
 type ThemeContextProps = {
   theme: 'light' | 'dark'
   toggleTheme: () => void
+  className: (name: string) => string
 }
 
-const ThemeContext = createContext({} as ThemeContextProps)
+export const ThemeContext = createContext({} as ThemeContextProps)
 
 export default function ThemeProvider({ children }: ThemeProviderProps) {
   const localTheme = localStorage.getItem('theme')
@@ -24,8 +25,11 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
   }
 
+  const className = (name: string) =>
+    name + (theme === 'dark' ? ' ' + name + '-dark' : '')
+
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, className }}>
       {children}
     </ThemeContext.Provider>
   )
