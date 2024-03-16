@@ -1,77 +1,114 @@
 import { useTheme } from '../../hooks/useTheme'
 import LogoLight from '../../assets/images/logo_light.png'
 import LogoDark from '../../assets/images/logo_dark.png'
-import { Screen } from './Screen'
+import Screen from './components/Screen'
 import './index.css'
 import { useState } from 'react'
-import { Keyboard } from './Keyboard'
-
-export type Operations = 'plus' | 'minus' | 'times' | 'divided' | 'mod'
+import Keyboard from './components/Keyboard'
+import {
+  FunctionPerLabel,
+  getFunctionPerLabel,
+  isSymbol,
+  removeParentesis,
+} from '../../utils/functions/symbolsFn'
 
 type Calculation = {
   number: string
-  staged?: string
-  operation?: Operations
+  operation: string[]
 }
 
 const INITIAL_STATE: Calculation = {
   number: '0',
+  operation: [],
 }
 
 export default function Calculator() {
   const { theme, className } = useTheme()
   const [calculation, setCalculation] = useState<Calculation>(INITIAL_STATE)
 
-  function handleNumberChange(value: string) {
-    setCalculation((prev) => ({ ...prev, number: value }))
-  }
+  const saved_ops = localStorage.getItem('ops')
+  const local_ops = saved_ops ? JSON.parse(saved_ops) : []
 
-  function onOperationChange(operation: Operations) {
-    if (operation == 'minus' && calculation.number === '0') {
-      setCalculation((prev) => ({ ...prev, number: '-' }))
+  function handleNumberChange(value: string) {
+    if (value.trim() === '') return
+
+    const lastChar = value[value.length - 1]
+
+    if (value.length === 1) {
+      if (isSymbol(value)) {
+        const symbol = getFunctionPerLabel(value)
+        if (symbol?.label === '−') {
+          setCalculation((prev) => ({ ...prev, number: value }))
+          return
+        }
+      }
+
+      if (value === '.') {
+        setCalculation((prev) => ({ ...prev, number: '0.' }))
+      }
+    }
+
+    // typed a arithmetic sign
+    if (isSymbol(lastChar)) {
+      if (lastChar === '=') handleEquals()
+      else addToOperation(calculation.number, lastChar)
       return
     }
 
-    if (calculation.staged && calculation.number) {
-      handleSubmit()
-    }
-
-    setCalculation((prev) => ({ ...prev, operation }))
+    setCalculation((prev) => ({ ...prev, number: value.trim() }))
   }
 
-  function handleSubmit() {
-    if (calculation.staged && calculation.number) {
-      const num = parseFloat(calculation.number)
-      const stg = parseFloat(calculation.staged)
-      let result = ''
+  function addToOperation(value: string, symbol: string) {
+    let newValue = ''
+    if (value.length > 1 && value.startsWith('−'))
+      newValue = `(${parseFloat(value)})`
 
-      switch (calculation.operation) {
-        case 'plus':
-          result = (num + stg).toString()
-          break
+    setCalculation((prev) => ({
+      ...prev,
+      operation: [...prev.operation, newValue, symbol],
+    }))
+  }
 
-        case 'minus':
-          result = (num - stg).toString()
-          break
+  function handleEquals() {
+    const operation = calculation.operation
+    let result: number | undefined
+    let sign: FunctionPerLabel | undefined
 
-        case 'times':
-          result = (num * stg).toString()
-          break
+    // whether there is only one element in the array or the last element of
+    //the array operation is an arithmetic sign
+    if (operation.length === 1 || isSymbol(operation[operation.length - 1]))
+      return
 
-        case 'divided':
-          result = (num / stg).toString()
-          break
-
-        case 'mod':
-          result = (num % stg).toString()
-          break
+    calculation.operation.forEach((numOp) => {
+      // element is a symbol
+      if (isSymbol(numOp) && getFunctionPerLabel(numOp)) {
+        sign = getFunctionPerLabel(numOp)!
+        return
       }
+      const numberWithNoParentesis = removeParentesis(numOp)
+      const number = parseFloat(numberWithNoParentesis)
 
-      setCalculation({
-        operation: undefined,
-        staged: undefined,
-        number: result,
-      })
+      if (!isNaN(number)) {
+        // no number waiting to be calculated
+        if (!result) result = number
+        // there is number waiting to be calculated and a arithmetic sign
+        else if (sign) {
+          result = sign.func(result, number)
+          sign = undefined
+        }
+      }
+    })
+
+    if (sign && result) {
+      result = sign.func(result, parseFloat(calculation.number))
+    }
+
+    if (result) {
+      localStorage.setItem(
+        'ops',
+        JSON.stringify([...local_ops, [...operation, '=', result]]),
+      )
+      setCalculation({ number: result?.toString(), operation: [] })
     }
   }
 
@@ -79,7 +116,11 @@ export default function Calculator() {
     <main className={className('container')}>
       <div className={className('content')}>
         <img src={theme === 'light' ? LogoDark : LogoLight} alt="kasio logo" />
-        <Screen value={calculation.number} />
+        <Screen
+          value={calculation.number}
+          onChange={(e) => handleNumberChange(e.target.value)}
+          operation={calculation.operation}
+        />
         <Keyboard onChange={handleNumberChange} />
       </div>
     </main>
