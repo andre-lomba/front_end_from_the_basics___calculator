@@ -5,6 +5,9 @@
   --input-color-light: #000000;
   --input-color-dark: #ffffff;
 
+  --input-border-light: #62656e;
+  --input-border-dark: #3c3f47;
+
   --especial-color: #a15208;
 }
 
@@ -15,7 +18,7 @@
 
 .screen {
   height: 190px;
-  border: 10px solid #62656e;
+  border: 10px solid var(--input-border-light);
   border-radius: 8px;
   background-color: var(--input-bg-light);
 
@@ -23,14 +26,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  transition: background-color 0.4s ease-in-out;
 }
 
 .screen:focus-within {
   outline: auto;
 }
 
-.screen-dark {
+.screen.dark {
   background-color: var(--input-bg-dark);
+  border-color: var(--input-border-dark);
 }
 
 .operation {
@@ -41,8 +46,6 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 5px;
-
-  border: 1px solid black;
 }
 
 .calculation {
@@ -50,7 +53,7 @@
   font-size: 14px;
 }
 
-.calculation-dark {
+.calculation.dark {
   color: var(--input-color-dark);
 }
 
@@ -72,6 +75,6 @@
   margin: 0 auto;
 }
 
-.input-dark {
+.input.dark {
   color: var(--input-color-dark);
 }

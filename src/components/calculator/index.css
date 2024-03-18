@@ -16,14 +16,16 @@
   justify-content: center;
 
   overflow: hidden;
+  transition: background-color 0.4s ease-in-out;
 }
 
-.container-dark {
+.container.dark {
   background-color: var(--bg-dark);
 }
 
 .content {
-  height: 785px;
+  min-height: 700px;
+  min-width: 400px;
   width: 447px;
   position: relative;
   background-color: var(--content-light);
@@ -34,10 +36,11 @@
   flex-direction: column;
   align-items: center;
 
-  box-shadow: inset rgb(0, 0, 0) 0px 0px 10px -5px;
+  box-shadow: inset rgb(0, 0, 0) 0px 0px 10px -3px;
+  transition: background-color 0.4s ease-in-out;
 }
 
-.content-dark {
+.content.dark {
   background-color: var(--content-dark);
 }
 
