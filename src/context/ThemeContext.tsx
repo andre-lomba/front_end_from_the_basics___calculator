@@ -26,7 +26,7 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
   }
 
   const className = (name: string) =>
-    name + (theme === 'dark' ? ' ' + name + '-dark' : '')
+    name + (theme === 'dark' ? ' ' + name + ' dark' : '')
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, className }}>
