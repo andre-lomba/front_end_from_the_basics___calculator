@@ -115,13 +115,13 @@ export default function Calculator() {
   return (
     <main className={className('container')}>
       <div className={className('content')}>
-        <img src={theme === 'light' ? LogoDark : LogoLight} alt="kasio logo" />
+        <img src={theme === 'light' ? LogoDark : LogoLight} alt="logo" />
         <Screen
           value={calculation.number}
           onChange={(e) => handleNumberChange(e.target.value)}
           operation={calculation.operation}
         />
-        <Keyboard onChange={handleNumberChange} />
+        <Keyboard />
       </div>
     </main>
   )
