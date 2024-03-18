@@ -1,0 +1,41 @@
+:root {
+  --button-light: #40434a;
+  --button-dark: #252525;
+
+  --button-colored-light: #a66173;
+  --button-colored-dark: #824d5b;
+}
+
+.button {
+  border: none;
+  background-color: var(--button-light);
+  color: #ffffff;
+  border-radius: 10px;
+  box-shadow: rgb(0, 0, 0) 0px 0px 4px;
+  font-size: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.4s ease-in-out;
+}
+
+.button.dark {
+  background-color: var(--button-dark);
+}
+
+.button.colored {
+  background-color: var(--button-colored-light);
+}
+
+.button.colored.dark {
+  background-color: var(--button-colored-dark);
+}
+
+.button.big {
+  grid-row: span 2;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
