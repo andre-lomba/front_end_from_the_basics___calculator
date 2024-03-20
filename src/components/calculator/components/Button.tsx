@@ -1,16 +1,22 @@
-import { ReactNode, useEffect } from 'react'
+import { HTMLAttributes, ReactNode, useEffect } from 'react'
 import { useTheme } from '../../../hooks/useTheme'
 
 import './Button.css'
 
-type ButtonProps = {
+type ButtonProps = HTMLAttributes<HTMLButtonElement> & {
   data: { value?: string; label: string | ReactNode }
   onClick: (value: string | ReactNode) => void
   colored?: boolean
   size: 'regular' | 'big'
 }
 
-export default function Button({ data, onClick, colored, size }: ButtonProps) {
+export default function Button({
+  data,
+  onClick,
+  colored,
+  size,
+  ...props
+}: ButtonProps) {
   const { className } = useTheme()
 
   useEffect(() => {
@@ -28,6 +34,7 @@ export default function Button({ data, onClick, colored, size }: ButtonProps) {
 
   return (
     <button
+      {...props}
       onClick={() => onClick(data.value)}
       className={className('button' + ' ' + size + (colored ? ' colored' : ''))}
     >
