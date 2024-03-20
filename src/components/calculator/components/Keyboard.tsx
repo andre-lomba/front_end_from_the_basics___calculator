@@ -1,11 +1,7 @@
-import { Moon, Sun } from 'lucide-react'
-import { useTheme } from '../../../hooks/useTheme'
 import Button from './Button'
 import './Keyboard.css'
 
 export default function Keyboard() {
-  const { theme, toggleTheme } = useTheme()
-
   return (
     <div className="keyboard">
       <div className="grid">
@@ -15,13 +11,7 @@ export default function Keyboard() {
           data={{ label: 'C' }}
           onClick={() => undefined}
         />
-        <Button
-          size="regular"
-          data={{
-            label: theme === 'dark' ? <Sun size={40} /> : <Moon size={40} />,
-          }}
-          onClick={toggleTheme}
-        />
+        <Button size="regular" data={{ label: '+/−' }} onClick={console.log} />
         <Button size="regular" data={{ label: '%' }} onClick={console.log} />
         <Button size="regular" data={{ label: '÷' }} onClick={console.log} />
         <Button
