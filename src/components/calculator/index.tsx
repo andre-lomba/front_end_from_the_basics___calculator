@@ -11,6 +11,7 @@ import {
   isSymbol,
   removeParentesis,
 } from '../../utils/functions/symbolsFn'
+import ThemeToggler from './components/ThemeToggler'
 
 type Calculation = {
   number: string
@@ -116,11 +117,8 @@ export default function Calculator() {
     <main className={className('container')}>
       <div className={className('content')}>
         <img src={theme === 'light' ? LogoDark : LogoLight} alt="logo" />
-        <Screen
-          value={calculation.number}
-          onChange={(e) => handleNumberChange(e.target.value)}
-          operation={calculation.operation}
-        />
+        <ThemeToggler />
+        <Screen />
         <Keyboard />
       </div>
     </main>
