@@ -63,7 +63,6 @@ export default function Button({ value, type, size }: ButtonProps) {
       className={className(
         'button' + ' ' + size + (type === 'reset' ? ' colored' : ''),
       )}
-      autoFocus={value === '='}
     >
       {type === 'operator' ? getOperator(value) : value}
     </button>
