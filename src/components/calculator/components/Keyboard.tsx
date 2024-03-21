@@ -5,70 +5,25 @@ export default function Keyboard() {
   return (
     <div className="keyboard">
       <div className="grid">
-        <Button
-          colored
-          size="regular"
-          data={{ label: 'C' }}
-          onClick={() => undefined}
-        />
-        <Button size="regular" data={{ label: '+/−' }} onClick={console.log} />
-        <Button size="regular" data={{ label: '%' }} onClick={console.log} />
-        <Button size="regular" data={{ label: '÷' }} onClick={console.log} />
-        <Button
-          size="regular"
-          data={{ value: '7', label: '7' }}
-          onClick={console.log}
-        />
-        <Button
-          size="regular"
-          data={{ value: '8', label: '8' }}
-          onClick={console.log}
-        />
-        <Button
-          size="regular"
-          data={{ value: '9', label: '9' }}
-          onClick={console.log}
-        />
-        <Button size="regular" data={{ label: '×' }} onClick={console.log} />
-        <Button
-          size="regular"
-          data={{ value: '4', label: '4' }}
-          onClick={console.log}
-        />
-        <Button
-          size="regular"
-          data={{ value: '5', label: '5' }}
-          onClick={console.log}
-        />
-        <Button
-          size="regular"
-          data={{ value: '6', label: '6' }}
-          onClick={console.log}
-        />
-        <Button size="regular" data={{ label: '−' }} onClick={console.log} />
-        <Button
-          size="regular"
-          data={{ value: '1', label: '1' }}
-          onClick={console.log}
-        />
-        <Button
-          size="regular"
-          data={{ value: '2', label: '2' }}
-          onClick={console.log}
-        />
-        <Button
-          size="regular"
-          data={{ value: '3', label: '3' }}
-          onClick={console.log}
-        />
-        <Button size="big" data={{ label: '+' }} onClick={console.log} />
-        <Button
-          size="regular"
-          data={{ value: '0', label: '0' }}
-          onClick={console.log}
-        />
-        <Button size="regular" data={{ label: '.' }} onClick={console.log} />
-        <Button size="regular" data={{ label: '=' }} onClick={console.log} />
+        <Button size="regular" type="reset" value="C" />
+        <Button size="regular" type="symbol" value="+/-" />
+        <Button size="regular" type="operator" value="%" />
+        <Button size="regular" type="operator" value="/" />
+        <Button size="regular" type="number" value="7" />
+        <Button size="regular" type="number" value="8" />
+        <Button size="regular" type="number" value="9" />
+        <Button size="regular" type="operator" value="*" />
+        <Button size="regular" type="number" value="4" />
+        <Button size="regular" type="number" value="5" />
+        <Button size="regular" type="number" value="6" />
+        <Button size="regular" type="operator" value="-" />
+        <Button size="regular" type="number" value="1" />
+        <Button size="regular" type="number" value="2" />
+        <Button size="regular" type="number" value="3" />
+        <Button size="big" type="operator" value="+" />
+        <Button size="regular" type="number" value="0" />
+        <Button size="regular" type="symbol" value="." />
+        <Button size="regular" type="operator" value="=" />
       </div>
     </div>
   )
