@@ -1,0 +1,53 @@
+:root {
+  --toggler-color: rgb(180, 196, 209);
+
+  --toggler-bg-light: rgb(255, 148, 148);
+  --toggler-bg-dark: rgb(255, 225, 142);
+}
+
+.theme-toggler {
+  position: absolute;
+  top: 23px;
+  right: 30px;
+  height: 28px;
+  width: 48px;
+  background-color: var(--toggler-color);
+  border: 1px solid black;
+  border-radius: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-bar {
+  position: relative;
+  height: 22px;
+  width: 42px;
+  border-radius: 50px;
+  border: 1px solid black;
+  background-color: var(--toggler-bg-light);
+  transition: background-color 0.5s ease;
+}
+
+.theme-bar.dark {
+  background-color: var(--toggler-bg-dark);
+}
+
+.sliding-circle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  height: 18.5px;
+  width: 18.5px;
+  background-color: var(--toggler-color);
+  border-radius: 50px;
+  border: 1px solid black;
+  transform: translateX(5%);
+  transition: all 0.3s ease;
+}
+
+.sliding-circle.dark {
+  transform: translateX(110%);
+}

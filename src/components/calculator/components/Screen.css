@@ -1,0 +1,80 @@
+:root {
+  --input-bg-light: #d5e1e3;
+  --input-bg-dark: #181818;
+
+  --input-color-light: #000000;
+  --input-color-dark: #ffffff;
+
+  --input-border-light: #62656e;
+  --input-border-dark: #3c3f47;
+
+  --especial-color: #a15208;
+}
+
+@font-face {
+  font-family: 'Digital';
+  src: url('../../../assets/fonts/DS-DIGI.TTF') format('truetype');
+}
+
+.screen {
+  height: 190px;
+  width: 100%;
+  border: 10px solid var(--input-border-light);
+  border-radius: 8px;
+  background-color: var(--input-bg-light);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.4s ease-in-out;
+}
+
+.screen.dark {
+  background-color: var(--input-bg-dark);
+  border-color: var(--input-border-dark);
+}
+
+.operation {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding-inline: 5px;
+  user-select: none;
+}
+
+.number-symbol {
+  color: var(--input-color-light);
+  font-size: 14px;
+}
+
+.number-symbol.dark {
+  color: var(--input-color-dark);
+}
+
+.number-symbol.especial {
+  color: var(--especial-color);
+  font-size: 18px;
+}
+
+.field {
+  width: 100%;
+  height: 150px;
+  text-align: end;
+  font-family: 'Digital';
+  font-size: 80px;
+  color: var(--input-color-light);
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  word-break: break-all;
+}
+
+.field.dark {
+  color: var(--input-color-dark);
+}
